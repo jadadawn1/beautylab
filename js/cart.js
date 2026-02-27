@@ -36,51 +36,52 @@ function renderCart() {
 
 document.addEventListener('DOMContentLoaded', () => {
   renderCart();
+
   const tbody = document.querySelector('#cart-table tbody');
-  if (!tbody) return;
-  tbody.addEventListener('input', e => {
-    if (e.target.classList.contains('qty')) {
-      const id = parseInt(e.target.dataset.id, 10);
-      const qty = parseInt(e.target.value, 10);
-      const cart = loadCart();
-      const item = cart.find(i => i.id === id);
-      if (item) {
-        item.quantity = qty;
+  
+  // 1. Logic for Updating Quantity
+  if (tbody) {
+    tbody.addEventListener('input', e => {
+      if (e.target.classList.contains('qty')) {
+        const id = parseInt(e.target.dataset.id, 10);
+        const qty = parseInt(e.target.value, 10);
+        const cart = loadCart();
+        const item = cart.find(i => i.id === id);
+        if (item && qty > 0) {
+          item.quantity = qty;
+          saveCart(cart);
+          renderCart();
+        }
+      }
+    });
+
+    // 2. Logic for Removing Items
+    tbody.addEventListener('click', e => {
+      if (e.target.classList.contains('remove-btn')) {
+        const id = parseInt(e.target.dataset.id, 10);
+        let cart = loadCart();
+        cart = cart.filter(i => i.id !== id);
         saveCart(cart);
         renderCart();
       }
-// Target the checkout button
+    });
+  }
+
+  // 3. Logic for Checkout (Moved outside of tbody listener)
   const checkoutBtn = document.getElementById('checkout-btn');
-  
   if (checkoutBtn) {
     checkoutBtn.addEventListener('click', () => {
       const cart = loadCart();
-      
+
       if (cart.length === 0) {
-        alert("Your cart is empty!");
+        alert("Your cart is empty! Add some Dawn Beauty products first.");
         return;
       }
 
-      // Requirement: Simulated checkout 
-      alert("Thank you for your purchase! Your order has been placed successfully.");
+      alert("Thank you for your purchase from Dawn Beauty Lab! Your order has been placed.");
       
-      // Clear the cart after successful simulated purchase
-      localStorage.removeItem(cartKey);
-      
-      // Requirement: Redirect to proper page after action 
-      // Redirecting to profile/order history as per Sitemap 
-      window.location.href = "profile.html"; 
+      localStorage.removeItem(cartKey); // Empty the cart
+      window.location.href = "profile.html"; // Redirect to profile
     });
   }
-    }
-  });
-  tbody.addEventListener('click', e => {
-    if (e.target.classList.contains('remove-btn')) {
-      const id = parseInt(e.target.dataset.id, 10);
-      let cart = loadCart();
-      cart = cart.filter(i => i.id !== id);
-      saveCart(cart);
-      renderCart();
-    }
-  });
 });
