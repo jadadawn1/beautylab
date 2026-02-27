@@ -26,7 +26,7 @@ const skincareProducts = [
     name: "Vitamin C Brightening Serum",
     price: 29.99,
     skinType: "Dull Skin",
-    image: "images/vitamin-c-serum.jpg",
+    image: "images/brightening-vitamin-c-serum.jpg",
     ingredients: ["ascorbic acid", "ferulic acid", "hyaluronic acid"],
     howToUse:
       "Apply 2–3 drops to clean, dry face each morning before moisturizer.",
@@ -37,7 +37,7 @@ const skincareProducts = [
     name: "Hyaluronic Hydration Serum",
     price: 27.5,
     skinType: "Dry Skin",
-    image: "images/hyaluronic-serum.jpg",
+    image: "images/hydrating-hyaluronic-acid-serum.jpg",
     ingredients: ["hyaluronic acid", "glycerin", "panthenol"],
     howToUse:
       "Pat onto damp skin after cleansing, then follow with moisturizer.",
@@ -48,7 +48,7 @@ const skincareProducts = [
     name: "Retinol Renewal Serum",
     price: 32.0,
     skinType: "Aging Skin",
-    image: "images/retinol-serum.jpg",
+    image: "images/retinol-night-serum.jpg",
     ingredients: ["retinol", "peptides", "vitamin E"],
     howToUse:
       "Use at night on clean skin; start 1–2 times weekly and build tolerance.",
@@ -59,7 +59,7 @@ const skincareProducts = [
     name: "Barrier Repair Cream",
     price: 24.5,
     skinType: "Sensitive Skin",
-    image: "images/barrier-repair-cream.jpg",
+    image: "images/rich-nourishing-cream.jpg",
     ingredients: ["ceramides", "niacinamide", "shea butter"],
     howToUse:
       "Smooth over face and neck as the last step of your routine, morning & night.",
@@ -70,7 +70,7 @@ const skincareProducts = [
     name: "Daily Hydration Lotion",
     price: 21.0,
     skinType: "Normal Skin",
-    image: "images/daily-hydration-lotion.jpg",
+    image: "images/ultra-light-moisturizer.jpg",
     ingredients: ["squalane", "jojoba oil", "vitamin B5"],
     howToUse:
       "Apply generously to face and neck after serums, morning and evening.",
@@ -87,12 +87,13 @@ const skincareProducts = [
       "Apply liberally 15 minutes before sun exposure and reapply every 2 hours.",
     rating: 4.8
   },
+
   {
     id: 9,
     name: "Overnight Repair Mask",
     price: 28.0,
     skinType: "Dry/Dull Skin",
-    image: "images/overnight-mask.jpg",
+    image: "images/soothing-calming-mask.jpg",
     ingredients: ["rosehip oil", "squalane", "niacinamide"],
     howToUse:
       "Apply a thin layer to clean skin before bed; rinse in the morning.",
@@ -103,7 +104,7 @@ const skincareProducts = [
     name: "Acne Control Spot Treatment",
     price: 18.5,
     skinType: "Oily/Acne-Prone",
-    image: "images/spot-treatment.jpg",
+    image: "images/clarifying-acne-treatment.jpg",
     ingredients: ["benzoyl peroxide", "salicylic acid", "tea tree oil"],
     howToUse:
       "Dab directly onto blemishes once or twice daily until clear.",
