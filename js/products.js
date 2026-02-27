@@ -116,7 +116,10 @@ const skincareProducts = [
 let isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
 
 function addToCart(productId) {
-  if (!isLoggedIn) return;
+  if (!isLoggedIn) {
+    alert('Please log in before adding items to your cart.');
+    return;
+  }
   const cartKey = 'beautyCart';
   const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
   const product = skincareProducts.find(p => p.id === productId);
@@ -142,7 +145,7 @@ function renderProducts() {
       <h3>${p.name}</h3>
       <p>$${p.price.toFixed(2)}</p>
       <button class="view-btn" data-id="${p.id}">View Details</button>
-      <button class="add-btn" data-id="${p.id}" ${!isLoggedIn ? 'disabled title="login to add"' : ''}>Add to Cart</button>
+      <button class="add-btn" data-id="${p.id}">Add to Cart</button>
     `;
     grid.appendChild(card);
   });
