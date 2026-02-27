@@ -128,3 +128,74 @@ th,
   font-weight: bold;
   padding: 1rem;
 }
+
+/* Hero Section Enhancements */
+.hero {
+    background: linear-gradient(to bottom, var(--secondary), #fff); /* Fade effect */
+    padding: 6rem 1rem;
+}
+
+.shop-now-btn {
+    display: inline-block;
+    background-color: var(--text-color);
+    color: #fff;
+    padding: 1rem 2.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 50px; /* Rounded pill shape */
+    margin-top: 1.5rem;
+    transition: background 0.3s ease;
+}
+
+.shop-now-btn:hover {
+    background-color: var(--accent);
+}
+
+/* Featured Section */
+.featured-section {
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.featured-section h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Reusing your grid for the featured section */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+/* Footer Styling */
+.footer {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+    padding: 3rem 1rem;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    margin-bottom: 1.5rem;
+}
+
+.socials a {
+    text-decoration: none;
+    color: var(--accent);
+    margin: 0 0.5rem;
+    font-weight: bold;
+}
+
+/* Detailed View Button */
+.view-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--text-color);
+    text-decoration: underline;
+    font-size: 0.9rem;
+}

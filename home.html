@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beauty Lab Home</title>
+    <title>Dawn Beauty Lab | Home</title>
     <link rel="stylesheet" href="css/styles.css">
     <script type="module" src="js/auth.js"></script>
 </head>
@@ -14,17 +14,35 @@
         <a href="products.html">Products</a>
         <a href="cart.html">Cart</a>
         <a href="profile.html">Profile</a>
-        <a href="register.html">Register</a> <a href="login.html">Login</a>
+        <a href="register.html">Register</a> 
+        <a href="login.html">Login</a>
         <a href="admin.html">Admin</a>
     </nav>
-    <!-- Home page content goes here -->
+
     <main>
         <section class="hero">
             <h1>Dawn Beauty Lab</h1>
-            <p class="tagline">"Where science meets serenity"</p>
+            <p class="tagline">"Confidence Begins with Care"</p>
+            <a href="products.html" class="shop-now-btn">Shop Now</a>
+        </section>
+
+        <section class="featured-section">
+            <h2>Featured Products</h2>
+            <div id="featured-products-container" class="product-grid">
+                </div>
         </section>
     </main>
 
-    <script src="js/products.js"></script>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>Contact Us: info@dawnbeautylab.com | (555) 123-4567</p>
+            <div class="socials">
+                <a href="#">Instagram</a> | <a href="#">Facebook</a> | <a href="#">Twitter</a>
+            </div>
+        </div>
+        <p>&copy; 2026 Dawn Beauty Lab. All rights reserved.</p>
+    </footer>
+
+    <script type="module" src="js/home.js"></script>
 </body>
 </html>
