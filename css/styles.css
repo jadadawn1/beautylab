@@ -52,6 +52,13 @@ body {
   text-align: center;
 }
 
+.product-card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
 .product-card h3 {
   margin-top: 0;
   color: var(--text-color);
@@ -74,6 +81,18 @@ body {
 
 .product-card button:hover {
   background: var(--primary);
+}
+
+/* hero section on home */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem;
+  background: var(--secondary);
+}
+.hero .tagline {
+  font-style: italic;
+  color: var(--accent);
+  margin-top: 0.5rem;
 }
 
 /* cart table */
