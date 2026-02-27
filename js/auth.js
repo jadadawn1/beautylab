@@ -30,6 +30,78 @@ function loginUser(email, password) {
     }
 }
 
+// render and update profile
+function renderProfile() {
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) return;
+    document.getElementById('profile-name').textContent = user.name;
+    document.getElementById('profile-email').textContent = user.email;
+    document.getElementById('profile-contact').textContent = user.contact || '';
+    document.getElementById('profile-address').textContent = user.address || '';
+    // load order history from localStorage cart as a placeholder
+    const orders = JSON.parse(localStorage.getItem('beautyCart')) || [];
+    const list = document.getElementById('orders-list');
+    if (list) {
+        list.innerHTML = '';
+        orders.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = `${item.name} ×${item.quantity} ($${item.price})`;
+            list.appendChild(li);
+        });
+    }
+}
+
+function enableProfileEditing() {
+    document.getElementById('edit-profile-btn').addEventListener('click', () => {
+        document.getElementById('profile-edit').style.display = 'block';
+    });
+    const editForm = document.getElementById('edit-form');
+    if (editForm) {
+        editForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const contact = document.getElementById('contact').value;
+            const address = document.getElementById('address').value;
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            if (user) {
+                user.contact = contact;
+                user.address = address;
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                const ix = users.findIndex(u => u.email === user.email);
+                if (ix > -1) {
+                    users[ix] = user;
+                    saveUsers();
+                }
+                renderProfile();
+                document.getElementById('profile-edit').style.display = 'none';
+            }
+        });
+    }
+}
+
+function addPasswordChangeHandler() {
+    const pwForm = document.getElementById('password-form');
+    if (!pwForm) return;
+    pwForm.addEventListener('submit', e => {
+        e.preventDefault();
+        const oldPass = document.getElementById('old-pass').value;
+        const newPass = document.getElementById('new-pass').value;
+        const user = JSON.parse(localStorage.getItem('currentUser'));
+        if (user && user.password === oldPass) {
+            user.password = newPass;
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            const ix = users.findIndex(u => u.email === user.email);
+            if (ix > -1) {
+                users[ix].password = newPass;
+                saveUsers();
+            }
+            alert('Password changed');
+            pwForm.reset();
+        } else {
+            alert('Current password incorrect');
+        }
+    });
+}
+
 // form handlers
 window.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
@@ -56,5 +128,12 @@ window.addEventListener('DOMContentLoaded', () => {
                 alert('Registration failed (maybe email already used)');
             }
         });
+    }
+
+    // if on profile page, render and wire handlers
+    if (document.getElementById('profile-info')) {
+        renderProfile();
+        enableProfileEditing();
+        addPasswordChangeHandler();
     }
 });
