@@ -49,6 +49,29 @@ document.addEventListener('DOMContentLoaded', () => {
         saveCart(cart);
         renderCart();
       }
+// Target the checkout button
+  const checkoutBtn = document.getElementById('checkout-btn');
+  
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      const cart = loadCart();
+      
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+
+      // Requirement: Simulated checkout 
+      alert("Thank you for your purchase! Your order has been placed successfully.");
+      
+      // Clear the cart after successful simulated purchase
+      localStorage.removeItem(cartKey);
+      
+      // Requirement: Redirect to proper page after action 
+      // Redirecting to profile/order history as per Sitemap 
+      window.location.href = "profile.html"; 
+    });
+  }
     }
   });
   tbody.addEventListener('click', e => {
