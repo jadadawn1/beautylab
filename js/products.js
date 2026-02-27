@@ -114,9 +114,6 @@ const skincareProducts = [
 // simple logged-in flag; in real app check auth state or localStorage
 let isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
 
-// simple logged-in flag; in real app check auth state or localStorage
-let isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
-
 function addToCart(productId) {
   if (!isLoggedIn) return;
   const cartKey = 'beautyCart';
