@@ -1,4 +1,5 @@
-const skincareProducts = [
+// 1. Export the array so other files (home.js, etc.) can see it
+export const skincareProducts = [
   {
     id: 1,
     name: "Gentle Foam Cleanser",
@@ -6,8 +7,7 @@ const skincareProducts = [
     skinType: "All Skin Types",
     image: "images/gentle-foam-cleanser.jpg",
     ingredients: ["water", "glycerin", "cocamidopropyl betaine", "aloe vera"],
-    howToUse:
-      "Wet face, dispense a small amount, massage into skin and rinse thoroughly.",
+    howToUse: "Wet face, dispense a small amount, massage into skin and rinse thoroughly.",
     rating: 4.5
   },
   {
@@ -17,8 +17,7 @@ const skincareProducts = [
     skinType: "Oily/Acne-Prone",
     image: "images/clarifying-gel-cleanser.jpg",
     ingredients: ["salicylic acid", "tea tree extract", "witch hazel"],
-    howToUse:
-      "Massage onto damp skin, focusing on oily areas; rinse with lukewarm water.",
+    howToUse: "Massage onto damp skin, focusing on oily areas; rinse with lukewarm water.",
     rating: 4.3
   },
   {
@@ -28,52 +27,47 @@ const skincareProducts = [
     skinType: "Dull Skin",
     image: "images/brightening-vitamin-c-serum.jpg",
     ingredients: ["ascorbic acid", "ferulic acid", "hyaluronic acid"],
-    howToUse:
-      "Apply 2–3 drops to clean, dry face each morning before moisturizer.",
+    howToUse: "Apply 2–3 drops to clean, dry face each morning before moisturizer.",
     rating: 4.7
   },
   {
     id: 4,
     name: "Hyaluronic Hydration Serum",
-    price: 27.5,
+    price: 27.50,
     skinType: "Dry Skin",
     image: "images/hydrating-hyaluronic-acid-serum.jpg",
     ingredients: ["hyaluronic acid", "glycerin", "panthenol"],
-    howToUse:
-      "Pat onto damp skin after cleansing, then follow with moisturizer.",
+    howToUse: "Pat onto damp skin after cleansing, then follow with moisturizer.",
     rating: 4.6
   },
   {
     id: 5,
     name: "Retinol Renewal Serum",
-    price: 32.0,
+    price: 32.00,
     skinType: "Aging Skin",
     image: "images/retinol-night-serum.jpg",
     ingredients: ["retinol", "peptides", "vitamin E"],
-    howToUse:
-      "Use at night on clean skin; start 1–2 times weekly and build tolerance.",
+    howToUse: "Use at night on clean skin; start 1–2 times weekly and build tolerance.",
     rating: 4.4
   },
   {
     id: 6,
     name: "Barrier Repair Cream",
-    price: 24.5,
+    price: 24.50,
     skinType: "Sensitive Skin",
     image: "images/rich-nourishing-cream.jpg",
     ingredients: ["ceramides", "niacinamide", "shea butter"],
-    howToUse:
-      "Smooth over face and neck as the last step of your routine, morning & night.",
+    howToUse: "Smooth over face and neck as the last step of your routine, morning & night.",
     rating: 4.6
   },
   {
     id: 7,
     name: "Daily Hydration Lotion",
-    price: 21.0,
+    price: 21.00,
     skinType: "Normal Skin",
     image: "images/ultra-light-moisturizer.jpg",
     ingredients: ["squalane", "jojoba oil", "vitamin B5"],
-    howToUse:
-      "Apply generously to face and neck after serums, morning and evening.",
+    howToUse: "Apply generously to face and neck after serums, morning and evening.",
     rating: 4.2
   },
   {
@@ -83,39 +77,36 @@ const skincareProducts = [
     skinType: "All Skin Types",
     image: "images/mineral-spf50.jpg",
     ingredients: ["zinc oxide", "titanium dioxide", "aloe vera"],
-    howToUse:
-      "Apply liberally 15 minutes before sun exposure and reapply every 2 hours.",
+    howToUse: "Apply liberally 15 minutes before sun exposure and reapply every 2 hours.",
     rating: 4.8
   },
-
   {
     id: 9,
     name: "Overnight Repair Mask",
-    price: 28.0,
+    price: 28.00,
     skinType: "Dry/Dull Skin",
     image: "images/soothing-calming-mask.jpg",
     ingredients: ["rosehip oil", "squalane", "niacinamide"],
-    howToUse:
-      "Apply a thin layer to clean skin before bed; rinse in the morning.",
+    howToUse: "Apply a thin layer to clean skin before bed; rinse in the morning.",
     rating: 4.5
   },
   {
     id: 10,
     name: "Acne Control Spot Treatment",
-    price: 18.5,
+    price: 18.50,
     skinType: "Oily/Acne-Prone",
     image: "images/clarifying-acne-treatment.jpg",
     ingredients: ["benzoyl peroxide", "salicylic acid", "tea tree oil"],
-    howToUse:
-      "Dab directly onto blemishes once or twice daily until clear.",
+    howToUse: "Dab directly onto blemishes once or twice daily until clear.",
     rating: 4.3
   }
 ];
 
-// simple logged-in flag; in real app check auth state or localStorage
+// 2. Auth State Check
 let isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
 
-function addToCart(productId) {
+// 3. Cart Functionality
+export function addToCart(productId) {
   if (!isLoggedIn) {
     alert('Please log in before adding items to your cart.');
     return;
@@ -124,6 +115,7 @@ function addToCart(productId) {
   const cart = JSON.parse(localStorage.getItem(cartKey)) || [];
   const product = skincareProducts.find(p => p.id === productId);
   if (!product) return;
+  
   const existing = cart.find(item => item.id === productId);
   if (existing) {
     existing.quantity += 1;
@@ -131,12 +123,14 @@ function addToCart(productId) {
     cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
   }
   localStorage.setItem(cartKey, JSON.stringify(cart));
-  alert('Added to cart');
+  alert(`${product.name} added to cart!`);
 }
 
-function renderProducts() {
+// 4. Rendering Functions
+export function renderProducts() {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
+  grid.innerHTML = ''; // Clear grid first
   skincareProducts.forEach(p => {
     const card = document.createElement('div');
     card.className = 'product-card';
@@ -151,25 +145,31 @@ function renderProducts() {
   });
 }
 
-function renderProductDetail() {
+export function renderProductDetail() {
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get('id'), 10);
   const p = skincareProducts.find(x => x.id === id);
   if (!p) return;
+  
   const container = document.getElementById('product-detail');
   if (!container) return;
   container.innerHTML = `
-    <img src="${p.image}" alt="${p.name}" />
-    <h2>${p.name}</h2>
-    <p>Price: $${p.price.toFixed(2)}</p>
-    <p>Skin Type: ${p.skinType}</p>
-    <p>Rating: ${p.rating}</p>
-    <p>Ingredients: ${p.ingredients.join(', ')}</p>
-    <p>How to use: ${p.howToUse}</p>
-    <button class="add-btn" data-id="${p.id}" ${!isLoggedIn ? 'disabled title="login to add"' : ''}>Add to Cart</button>
+    <div class="detail-layout">
+        <img src="${p.image}" alt="${p.name}" class="detail-img" />
+        <div class="detail-info">
+            <h2>${p.name}</h2>
+            <p class="detail-price">Price: $${p.price.toFixed(2)}</p>
+            <p><strong>Skin Type:</strong> ${p.skinType}</p>
+            <p><strong>Rating:</strong> ${p.rating} / 5</p>
+            <p><strong>Ingredients:</strong> ${p.ingredients.join(', ')}</p>
+            <p><strong>How to use:</strong> ${p.howToUse}</p>
+            <button class="add-btn" data-id="${p.id}" ${!isLoggedIn ? 'disabled title="Login to add"' : ''}>Add to Cart</button>
+        </div>
+    </div>
   `;
 }
 
+// 5. Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('product-grid')) {
     renderProducts();
@@ -177,7 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('product-detail')) {
     renderProductDetail();
   }
-  document.getElementById('product-grid')?.addEventListener('click', e => {
+
+  // Delegate click events for buttons
+  document.addEventListener('click', e => {
     if (e.target.matches('.view-btn')) {
       const id = parseInt(e.target.dataset.id, 10);
       window.location.href = `product-detail.html?id=${id}`;
@@ -187,10 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
       addToCart(id);
     }
   });
-  document.body.addEventListener('click', e => {
-    if (e.target.matches('.add-btn') && e.target.closest('#product-detail')) {
-      const id = parseInt(e.target.dataset.id, 10);
-      addToCart(id);
-    }
-  });
 });
+
+// Final Export for home.js
+export default skincareProducts;
