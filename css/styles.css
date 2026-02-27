@@ -1,0 +1,102 @@
+/* Basic pastel beauty brand aesthetic */
+:root {
+  --bg-color: #fdf6f0;
+  --primary: #ffe4e1;
+  --secondary: #e0ffff;
+  --accent: #ffb6c1;
+  --text-color: #333;
+}
+
+body {
+  margin: 0;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* sticky navigation */
+.navbar {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+}
+
+.navbar a:hover {
+  color: var(--accent);
+}
+
+/* grid layout for products */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-card h3 {
+  margin-top: 0;
+  color: var(--text-color);
+}
+
+.product-card p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.product-card button {
+  margin: 0.25rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+.product-card button:hover {
+  background: var(--primary);
+}
+
+/* cart table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th,
+ td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+.qty {
+  width: 3rem;
+}
+
+.cart-total {
+  text-align: right;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1rem;
+}
