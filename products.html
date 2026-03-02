@@ -16,13 +16,28 @@
         <a href="profile.html">Profile</a>
         <a href="register.html">Register</a>
         <a href="login.html">Login</a>
-    </nav>
+        <a href="admin.html">Admin</a> </nav>
 
     <main>
         <h1>Our Products</h1>
-        <div id="product-grid" class="grid"></div>
+
+        <section class="controls">
+            <input type="text" id="search-input" placeholder="Search products...">
+            
+            <select id="filter-select">
+                <option value="All">All Skin Types</option>
+                <option value="Oily">Oily/Acne-Prone</option>
+                <option value="Dry">Dry Skin</option>
+                <option value="Sensitive">Sensitive Skin</option>
+                <option value="Normal">Normal Skin</option>
+                <option value="Dull">Dull/Aging Skin</option>
+            </select>
+        </section>
+
+        <div id="product-grid" class="grid">
+            </div>
     </main>
 
-    <script src="js/products.js"></script>
+    <script type="module" src="js/products.js"></script>
 </body>
 </html>

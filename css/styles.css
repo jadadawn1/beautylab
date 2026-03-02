@@ -199,3 +199,22 @@ th,
     text-decoration: underline;
     font-size: 0.9rem;
 }
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+#search-input, #filter-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+#search-input {
+    width: 300px;
+}

@@ -102,12 +102,14 @@ export const skincareProducts = [
   }
 ];
 
-// 2. Auth State Check
-let isLoggedIn = Boolean(localStorage.getItem('isLoggedIn'));
+// 2. Auth State Check Function (Live check)
+function checkAuth() {
+  return Boolean(localStorage.getItem('isLoggedIn'));
+}
 
 // 3. Cart Functionality
 export function addToCart(productId) {
-  if (!isLoggedIn) {
+  if (!checkAuth()) {
     alert('Please log in before adding items to your cart.');
     return;
   }
@@ -120,26 +122,48 @@ export function addToCart(productId) {
   if (existing) {
     existing.quantity += 1;
   } else {
-    cart.push({ id: product.id, name: product.name, price: product.price, quantity: 1 });
+    cart.push({ 
+      id: product.id, 
+      name: product.name, 
+      price: product.price, 
+      image: product.image, // Added image for the cart view
+      quantity: 1 
+    });
   }
   localStorage.setItem(cartKey, JSON.stringify(cart));
   alert(`${product.name} added to cart!`);
 }
 
-// 4. Rendering Functions
-export function renderProducts() {
+// 4. Rendering Functions (With filtering support)
+export function renderProducts(filterType = "All", searchTerm = "") {
   const grid = document.getElementById('product-grid');
   if (!grid) return;
-  grid.innerHTML = ''; // Clear grid first
-  skincareProducts.forEach(p => {
+  
+  grid.innerHTML = ''; 
+
+  // Filtering Logic
+  const filtered = skincareProducts.filter(p => {
+    const matchesFilter = filterType === "All" || p.skinType.toLowerCase().includes(filterType.toLowerCase());
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesFilter && matchesSearch;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p class="no-results">No products found matching your search.</p>';
+    return;
+  }
+
+  filtered.forEach(p => {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.innerHTML = `
       <img src="${p.image}" alt="${p.name}" />
       <h3>${p.name}</h3>
       <p>$${p.price.toFixed(2)}</p>
-      <button class="view-btn" data-id="${p.id}">View Details</button>
-      <button class="add-btn" data-id="${p.id}">Add to Cart</button>
+      <div class="card-buttons">
+        <button class="view-btn" data-id="${p.id}">View Details</button>
+        <button class="add-btn" data-id="${p.id}">Add to Cart</button>
+      </div>
     `;
     grid.appendChild(card);
   });
@@ -153,17 +177,22 @@ export function renderProductDetail() {
   
   const container = document.getElementById('product-detail');
   if (!container) return;
+  
+  const userLoggedIn = checkAuth();
+
   container.innerHTML = `
     <div class="detail-layout">
         <img src="${p.image}" alt="${p.name}" class="detail-img" />
         <div class="detail-info">
             <h2>${p.name}</h2>
-            <p class="detail-price">Price: $${p.price.toFixed(2)}</p>
+            <p class="detail-price">$${p.price.toFixed(2)}</p>
             <p><strong>Skin Type:</strong> ${p.skinType}</p>
             <p><strong>Rating:</strong> ${p.rating} / 5</p>
             <p><strong>Ingredients:</strong> ${p.ingredients.join(', ')}</p>
             <p><strong>How to use:</strong> ${p.howToUse}</p>
-            <button class="add-btn" data-id="${p.id}" ${!isLoggedIn ? 'disabled title="Login to add"' : ''}>Add to Cart</button>
+            <button class="add-btn" data-id="${p.id}" ${!userLoggedIn ? 'disabled' : ''}>
+              ${userLoggedIn ? 'Add to Cart' : 'Login to Purchase'}
+            </button>
         </div>
     </div>
   `;
@@ -171,6 +200,7 @@ export function renderProductDetail() {
 
 // 5. Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
+  // Render based on which page we are on
   if (document.getElementById('product-grid')) {
     renderProducts();
   }
@@ -178,7 +208,7 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProductDetail();
   }
 
-  // Delegate click events for buttons
+  // Global Click Handling
   document.addEventListener('click', e => {
     if (e.target.matches('.view-btn')) {
       const id = parseInt(e.target.dataset.id, 10);
@@ -189,7 +219,17 @@ document.addEventListener('DOMContentLoaded', () => {
       addToCart(id);
     }
   });
+
+  // Search and Filter Listeners (if they exist on the page)
+  const searchInput = document.getElementById('search-input');
+  const filterSelect = document.getElementById('filter-select');
+
+  const handleFilterChange = () => {
+    renderProducts(filterSelect?.value || "All", searchInput?.value || "");
+  };
+
+  searchInput?.addEventListener('input', handleFilterChange);
+  filterSelect?.addEventListener('change', handleFilterChange);
 });
 
-// Final Export for home.js
 export default skincareProducts;
